@@ -1,0 +1,31 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.doctusoft</groupId>
+	    <artifactId>gwt-mock-parent</artifactId>
+	    <version>0.1.1</version>
+        <relativePath>../gwt-mock-parent/pom.xml</relativePath>
+    </parent>
+    
+	<groupId>com.doctusoft</groupId>
+	<artifactId>gwt-mock-example-app</artifactId>
+	<packaging>jar</packaging>
+	
+    <properties>
+        <gwtVersion>2.8.0-beta1</gwtVersion>
+	</properties>
+	    
+    <dependencies>
+
+            <dependency>
+                <groupId>com.google.gwt</groupId>
+                <artifactId>gwt-user</artifactId>
+                <version>${gwtVersion}</version>
+                <scope>provided</scope>
+            </dependency>
+
+    </dependencies>
+
+</project>

@@ -1,0 +1,53 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.doctusoft</groupId>
+	<artifactId>gwt-mock-parent</artifactId>
+	<version>0.1.1</version>
+	<name>gwt-mock parent</name>
+	<packaging>pom</packaging>
+
+	<description>A mocked implementation for GWT-2.5.1 that can run in the JVM to allow integration testing</description>
+	<url>https://github.com/Doctusoft/gwt-mock-2.5.1</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<scm>
+ 		<connection>scm:git:git@github.com:Doctusoft/gwt-mock-2.5.1.git</connection>
+  		<developerConnection>scm:git:git@github.com:Doctusoft/gwt-mock-2.5.1.git</developerConnection>
+  		<url>https://github.com/Doctusoft/gwt-mock-2.5.1</url>
+	</scm>
+
+	<licenses>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<name>Gabor Farkas</name>
+			<email>gabor.farkas@doctusoft.com</email>
+			<organization>Doctusoft Ltd.</organization>
+			<organizationUrl>http://www.doctusoft.com</organizationUrl>
+		</developer>
+	</developers>
+	
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+	
+    <modules>
+        <!--module>../gwt-mock-2.5.1</module-->
+        <module>../gwt-mock-example-app</module>
+        <module>../gwt-mock-example-app-test</module>
+    </modules>    
+	
+</project>
