@@ -22,8 +22,14 @@ package com.google.gwt.user.client.ui;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import com.doctusoft.gwtmock.GWTMock;
+import com.google.gwt.dom.client.Document;
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
+import com.google.gwt.event.dom.client.FocusEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 
 public class TestListBox {
 
@@ -59,5 +65,24 @@ public class TestListBox {
         Assert.assertEquals("getSelectedIndex", 2, lb.getSelectedIndex());
         //Assert.assertTrue("isItemSelected", lb.isItemSelected(2));
 
+    }
+    
+    @Test
+    public void testListBoxUserInput() {
+        ListBox lb = new ListBox();
+        lb.ensureDebugId("listBox1");
+        RootPanel.get().add(lb);
+
+        lb.addItem("item0", "v0");
+        lb.addItem("item1", "v1");
+
+        ChangeHandler changeHandler = Mockito.mock(ChangeHandler.class);
+        lb.addChangeHandler(changeHandler);
+
+        GWTMock.selectByVisibleText(Document.get().getElementById("gwt-debug-listBox1"), "item1");
+
+        Mockito.verify(changeHandler).onChange(Mockito.isA(ChangeEvent.class));
+
+        Assert.assertEquals("getSelectedIndex", 1, lb.getSelectedIndex());
     }
 }

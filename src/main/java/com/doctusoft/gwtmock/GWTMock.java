@@ -1,9 +1,14 @@
 package com.doctusoft.gwtmock;
 
+import java.util.NoSuchElementException;
+
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.core.shared.GWT.CustomGWTCreateSupplier;
 import com.google.gwt.dom.client.DOMImpl;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.InputElement;
+import com.google.gwt.dom.client.SelectElement;
+import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.user.client.ui.RootPanel;
 
 /**
@@ -55,5 +60,27 @@ public class GWTMock {
         element.focus();
         element.setAttribute(InputElement.MOCK_TYPED_VALUE, value);
         element.setValue(value);
+    }
+    
+    /**
+     * Select all options that display text matching the argument.
+     * Simulates browser user input behavior on ListBox element.
+     * 
+     * Will trigger ChangeEvent event. 
+     *
+     * @param text The visible text to match against
+     * @throws NoSuchElementException If no matching option elements are found
+     */
+    public static void selectByVisibleText(Element element, String text) {
+        SelectElement selectElement = (SelectElement)element;
+        selectElement.focus();
+        for (int i = 0; i < selectElement.getOptions().getLength(); i++) {
+          if (text.equals(selectElement.getOptions().getItem(i).getText()))  {
+              selectElement.setSelectedIndex(i);
+              selectElement.fireEvent(ChangeEvent.getType());
+              return;
+          }
+        }
+        throw new NoSuchElementException("Cannot locate option with text: " + text);
     }
 }
