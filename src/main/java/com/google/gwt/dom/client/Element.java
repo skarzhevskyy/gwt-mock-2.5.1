@@ -53,14 +53,11 @@ public class Element extends Node {
 	
 	public void fireEvent(Type<?> eventType) {
 		if ((__eventBits & Event.getTypeInt(eventType.getName())) != 0) {
-			__listener.onBrowserEvent(new Event(eventType.getName()));
+		   Event event = new Event(eventType.getName());
+		   event.__eventTarget = new EventTarget.MockEventTargetElement(this);
+			__listener.onBrowserEvent(event);
 		}
 	}
-	
-	/**
-	 * @deprecated TODO Why do we keep this? and why not just get the text from html when needed
-	 */
-	public String innerText = "";
 	
 	protected String tagName = null;
 	
@@ -345,7 +342,7 @@ public class Element extends Node {
 	 * The text between the start and end tags of the object.
 	 */
 	public final String getInnerText() {
-		return innerText;
+        return new Source(getInnerHTML()).getTextExtractor().toString();
 	}
 
 	/**
@@ -831,7 +828,6 @@ public class Element extends Node {
         if (html != null) {
             Source source = new Source(html);
             addParsedElements(this, source);
-            innerText = source.getTextExtractor().toString();
         }
     }
 	
@@ -851,7 +847,6 @@ public class Element extends Node {
 	    if (text != null) {
 	       this.appendChild(document.createTextNode(text));
 	    }
-		innerText = text;
 	}
 	
 	/**

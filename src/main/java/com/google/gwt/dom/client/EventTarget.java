@@ -36,4 +36,21 @@ public class EventTarget extends JavaScriptObject {
 
   protected EventTarget() {
   }
+  
+  // -- GWT Mock
+    public static class MockEventTargetElement extends EventTarget {
+        
+        Element element;
+
+        public MockEventTargetElement(Element element) {
+            super();
+            this.element = element;
+        }
+
+        @SuppressWarnings("unchecked")
+        public <T> T cast() {
+            return (T) element;
+        }
+        
+    }
 }

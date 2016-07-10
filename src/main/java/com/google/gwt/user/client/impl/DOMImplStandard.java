@@ -81,7 +81,11 @@ abstract class DOMImplStandard extends DOMImpl {
   }-*/;
 
   @Override
-  public native int getChildCount(Element elem) /*-{
+  public int getChildCount(Element elem) {
+     return elem.getChildCount();
+  }
+  
+  /*-{
     var count = 0, child = elem.firstChild;
     while (child) {
       if (child.nodeType == 1)

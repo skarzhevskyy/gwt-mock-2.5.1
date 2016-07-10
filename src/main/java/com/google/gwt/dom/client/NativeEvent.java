@@ -27,6 +27,9 @@ public class NativeEvent extends JavaScriptObject {
 	
 	// @Mock
 	public boolean __propagationStopped;
+	
+	// @Mock
+	public EventTarget __eventTarget;
 
   /**
    * The left mouse button.

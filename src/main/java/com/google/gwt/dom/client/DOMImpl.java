@@ -83,6 +83,7 @@ public class DOMImpl {
      */
     public static void fireEventBubbling(Element element, Type<?> eventType) {
         Event event = new Event(eventType.getName());
+        event.__eventTarget = new EventTarget.MockEventTargetElement(element);
         Element eventTarget = element;
         while (!event.isPropagationStopped()) {
             Element currentEventTarget = getFirstAncestorWithListener(eventType, eventTarget);
@@ -278,7 +279,7 @@ public class DOMImpl {
 																				}-*/;
 	
 	public EventTarget eventGetTarget(NativeEvent evt) {
-		return null;
+		return evt.__eventTarget;
 	}
 	
 	public final String eventGetType(NativeEvent evt) {
@@ -466,9 +467,17 @@ public class DOMImpl {
 		img.setAttribute("src", src);
 	}
 	
-	public boolean isOrHasChild(Node parent, Node child) {
-		return false;
-	}
+    public boolean isOrHasChild(Node parent, Node child) {
+        if (parent.equals(child)) {
+            return true;
+        }
+        for (Node c : parent.getChildNodes()) {
+            if (isOrHasChild(c, child)) {
+                return true;
+            }
+        }
+        return false;
+    }
 	
 	public native void scrollIntoView(Element elem) /*-{
 																	var left = elem.offsetLeft, top = elem.offsetTop;
