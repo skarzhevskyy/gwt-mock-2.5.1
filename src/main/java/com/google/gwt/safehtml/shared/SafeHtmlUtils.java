@@ -153,6 +153,11 @@ public final class SafeHtmlUtils {
    *         replaced with their corresponding HTML Entity References
    */
   public static String htmlEscape(String s) {
+      // GWT 2.8 compatible behavior
+      if (s == null) {
+	  return null;
+      }
+      
     if (s.indexOf("&") != -1) {
       s = AMP_RE.replace(s, "&amp;");
     }
